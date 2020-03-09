@@ -61,18 +61,13 @@ function main () {
   app.set('view engine', 'ejs');
   app.use(bodyParser.json());
   app.use(express.static(path.join(__dirname, 'public')));
-  // Routes & Handlers
+  //APIs
   app.post('/api/login', handlers.login);
-  app.get('/login',(req,res)=>{res.render("login",function(err,html){
-    if(err) {
-        res.send(404).json({
-            success: false,
-            message: 'Page not found'
-          });
-    }
-    res.send(html);
-  })});
+
+  // Routes & Handlers
+  
   app.get('/', middleware.checkToken, handlers.index);
+  
   app.listen(port, () => console.log(`Server is listening on port: ${port}`));
 }
 

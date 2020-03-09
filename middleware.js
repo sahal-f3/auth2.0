@@ -21,10 +21,15 @@ let checkToken = (req, res, next) => {
       }
     });
   } else {
-    return res.json({
-      success: false,
-      message: 'Auth token is not supplied'
-    });
+    return res.render("login",function(err,html){
+        if(err) {
+            res.send(404).json({
+                success: false,
+                message: 'Page not found'
+              });
+        }
+        res.send(html);
+      })
   }
 };
 
